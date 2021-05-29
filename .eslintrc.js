@@ -6,7 +6,7 @@ module.exports = {
     commonjs: true,
     es2020: true,
   },
-  plugins: ['import', '@typescript-eslint'],
+  plugins: ['import', 'react', '@typescript-eslint'],
   extends: [
     'airbnb',
     'airbnb/hooks',
@@ -24,6 +24,10 @@ module.exports = {
   rules: {
     'no-use-before-define': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/extensions': ['off', { tsx: 'ignroePackages' }],
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
     'react/jsx-filename-extension': [
       'off',
       { extensions: ['.tsx', '.jsx', '.js'] },
