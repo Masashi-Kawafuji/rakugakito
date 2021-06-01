@@ -19,7 +19,7 @@ const Routes: FC = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/news" component={News} />
-        <Route path="/song" component={Song} />
+        <Route path="/songs" component={Song} />
         <Route path="/video" component={Video} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
