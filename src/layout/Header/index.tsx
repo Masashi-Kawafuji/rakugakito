@@ -9,13 +9,13 @@ import Menu from './components/Menu';
 const Header: FC = () => {
   return (
     <header className="bg-white border-b border-gray-200">
-      <div className="p-3 text-center border-b border-gray-200">
+      <div className="px-5 lg:px-12 py-3 text-center border-b border-gray-200">
         <Link to="/">落餓鬼党</Link>
         <ul className="flex float-right">
-          <li className="mr-8">
+          <li className="ml-8">
             <FontAwesomeIcon className="text-lighten" icon={faTwitter} />
           </li>
-          <li className="mr-8">
+          <li className="ml-8">
             <FontAwesomeIcon className="text-lighten" icon={faEnvelope} />
           </li>
         </ul>

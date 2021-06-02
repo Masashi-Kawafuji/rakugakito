@@ -9,7 +9,7 @@ const Menu: FC<MenuProps> = ({ vertical = false }) => {
   return (
     <ul
       className={`flex ${
-        vertical ? 'flex-col' : 'flex-row flex-1 justify-between'
+        vertical ? 'flex-col' : 'flex-row flex-1 justify-around'
       } text-lighten`}
     >
       <MenuItem exact to="/">
