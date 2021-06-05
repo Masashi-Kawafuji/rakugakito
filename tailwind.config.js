@@ -2,10 +2,10 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   purge: ['./src/**/*.tsx'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
     fontFamily: {
-      notoSansJP: ['Noto Sans JP', 'sans-serif'],
+      'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
     },
     extend: {
       colors: {

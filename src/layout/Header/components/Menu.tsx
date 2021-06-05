@@ -16,7 +16,7 @@ const Menu: FC<MenuProps> = ({ vertical = false }) => {
         Home
       </MenuItem>
       <MenuItem to="/news">News</MenuItem>
-      <MenuItem to="/songs">Song</MenuItem>
+      <MenuItem to="/songs">Songs</MenuItem>
       <MenuItem to="/video">Video</MenuItem>
       <MenuItem to="/about">About</MenuItem>
       <MenuItem to="/contact">Contact</MenuItem>

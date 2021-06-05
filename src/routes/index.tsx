@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 const Home = lazy(() => import(/* webpackChunkName: "home" */ './Home'));
 const News = lazy(() => import(/* webpackChunkName: "news" */ './News'));
-const Song = lazy(() => import(/* webpackChunkName: "song" */ './Song'));
+const Songs = lazy(() => import(/* webpackChunkName: "songs" */ './Songs'));
 const Video = lazy(() => import(/* webpackChunkName: "video" */ './Video'));
 const About = lazy(() => import(/* webpackChunkName: "about" */ './About'));
 const Contact = lazy(
@@ -19,7 +19,7 @@ const Routes: FC = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/news" component={News} />
-        <Route path="/songs" component={Song} />
+        <Route path="/songs" component={Songs} />
         <Route path="/video" component={Video} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
