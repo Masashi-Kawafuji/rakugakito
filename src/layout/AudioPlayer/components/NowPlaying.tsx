@@ -4,7 +4,7 @@ type NowPlayingProps = Pick<HTMLAttributes<HTMLDivElement>, 'className'>;
 
 const NowPlaying: FC<NowPlayingProps> = ({ className }) => {
   return (
-    <div className={className}>
+    <div className={className || ''}>
       <p>ちろりちろりに</p>
     </div>
   );

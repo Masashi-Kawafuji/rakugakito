@@ -9,7 +9,7 @@ const ArticleItem: FC<ArticleItemProps> = ({
   article: { title, publishedAt, category, body },
   className,
 }) => {
-  return <div className={className} />;
+  return <div className={className || ''} />;
 };
 
 export default ArticleItem;

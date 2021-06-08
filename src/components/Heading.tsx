@@ -6,40 +6,37 @@ type HeadingProps = {
 
 type HeadingStyle = Record<'fontSize' | 'marginBottom' | 'fontWeight', string>;
 
-const Heading: FC<HeadingProps> = ({ variant, children }) => {
-  let headingStyle: HeadingStyle;
-
+function getHeadingStyle(variant: HeadingProps['variant']): HeadingStyle {
   switch (variant) {
     case 'h1':
-      headingStyle = {
+      return {
         fontSize: 'text-4xl',
         marginBottom: 'mb-6',
         fontWeight: 'font-bold',
       };
-      break;
     case 'h2':
-      headingStyle = {
+      return {
         fontSize: 'text-3xl',
         marginBottom: 'mb-4',
         fontWeight: 'font-bold',
       };
-      break;
     case 'h3':
-      headingStyle = {
+      return {
         fontSize: 'text-2xl',
         marginBottom: 'mb-n2',
         fontWeight: 'font-bold',
       };
-      break;
     default:
-      headingStyle = {
+      return {
         fontSize: '',
         marginBottom: '',
         fontWeight: 'font-bold',
       };
   }
+}
 
-  const className = Object.values(headingStyle).join(' ');
+const Heading: FC<HeadingProps> = ({ variant, children }) => {
+  const className = Object.values(getHeadingStyle(variant)).join(' ');
 
   return createElement(variant, { className }, children);
 };
