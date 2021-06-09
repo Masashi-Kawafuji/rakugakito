@@ -20,7 +20,6 @@ export type Scalars = {
 export type Article = _Document & _Linkable & {
   __typename?: 'Article';
   title?: Maybe<Scalars['String']>;
-  category?: Maybe<_Linkable>;
   featured_image?: Maybe<Scalars['Json']>;
   excerpt?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['Json']>;
@@ -43,32 +42,6 @@ export type ArticleConnectionEdge = {
   __typename?: 'ArticleConnectionEdge';
   /** The item at the end of the edge. */
   node: Article;
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-};
-
-export type Article_Category = _Document & _Linkable & {
-  __typename?: 'Article_category';
-  name?: Maybe<Scalars['String']>;
-  _meta: Meta;
-  _linkType?: Maybe<Scalars['String']>;
-};
-
-/** A connection to a list of items. */
-export type Article_CategoryConnectionConnection = {
-  __typename?: 'Article_categoryConnectionConnection';
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** A list of edges. */
-  edges?: Maybe<Array<Maybe<Article_CategoryConnectionEdge>>>;
-  totalCount: Scalars['Long'];
-};
-
-/** An edge in a connection. */
-export type Article_CategoryConnectionEdge = {
-  __typename?: 'Article_categoryConnectionEdge';
-  /** The item at the end of the edge. */
-  node: Article_Category;
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
 };
@@ -114,8 +87,6 @@ export type Query = {
   _allDocuments: _DocumentConnection;
   allArticles: ArticleConnectionConnection;
   allSongs: SongConnectionConnection;
-  article_category?: Maybe<Article_Category>;
-  allArticle_categorys: Article_CategoryConnectionConnection;
 };
 
 
@@ -198,39 +169,6 @@ export type QueryAllSongsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-
-export type QueryArticle_CategoryArgs = {
-  uid: Scalars['String'];
-  lang: Scalars['String'];
-};
-
-
-export type QueryAllArticle_CategorysArgs = {
-  sortBy?: Maybe<SortArticle_Categoryy>;
-  id?: Maybe<Scalars['String']>;
-  id_in?: Maybe<Array<Scalars['String']>>;
-  uid?: Maybe<Scalars['String']>;
-  uid_in?: Maybe<Array<Scalars['String']>>;
-  lang?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Scalars['String']>>;
-  tags_in?: Maybe<Array<Scalars['String']>>;
-  type?: Maybe<Scalars['String']>;
-  type_in?: Maybe<Array<Scalars['String']>>;
-  firstPublicationDate?: Maybe<Scalars['DateTime']>;
-  firstPublicationDate_after?: Maybe<Scalars['DateTime']>;
-  firstPublicationDate_before?: Maybe<Scalars['DateTime']>;
-  lastPublicationDate?: Maybe<Scalars['DateTime']>;
-  lastPublicationDate_after?: Maybe<Scalars['DateTime']>;
-  lastPublicationDate_before?: Maybe<Scalars['DateTime']>;
-  fulltext?: Maybe<Scalars['String']>;
-  similar?: Maybe<Similar>;
-  where?: Maybe<WhereArticle_Category>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
 export type RelatedDocument = {
   __typename?: 'RelatedDocument';
   /** The id of the document. */
@@ -270,15 +208,6 @@ export type SongConnectionEdge = {
   cursor: Scalars['String'];
 };
 
-export enum SortArticle_Categoryy {
-  MetaFirstPublicationDateAsc = 'meta_firstPublicationDate_ASC',
-  MetaFirstPublicationDateDesc = 'meta_firstPublicationDate_DESC',
-  MetaLastPublicationDateAsc = 'meta_lastPublicationDate_ASC',
-  MetaLastPublicationDateDesc = 'meta_lastPublicationDate_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC'
-}
-
 export enum SortArticley {
   MetaFirstPublicationDateAsc = 'meta_firstPublicationDate_ASC',
   MetaFirstPublicationDateDesc = 'meta_firstPublicationDate_DESC',
@@ -311,17 +240,10 @@ export enum SortSongy {
 export type WhereArticle = {
   title?: Maybe<Scalars['String']>;
   title_fulltext?: Maybe<Scalars['String']>;
-  /** category */
-  category?: Maybe<Scalars['String']>;
   excerpt?: Maybe<Scalars['String']>;
   excerpt_fulltext?: Maybe<Scalars['String']>;
   /** body */
   body_fulltext?: Maybe<Scalars['String']>;
-};
-
-export type WhereArticle_Category = {
-  name?: Maybe<Scalars['String']>;
-  name_fulltext?: Maybe<Scalars['String']>;
 };
 
 export type WhereSong = {

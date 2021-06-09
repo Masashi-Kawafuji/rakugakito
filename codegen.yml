@@ -2,10 +2,10 @@ schema:
   - https://rakugakito.prismic.io/graphql:
       method: GET
       headers:
-        Prismic-Ref: YL-qLxQAACYAVg0G
+        Prismic-Ref: YMDuUBQAACcAW50t
         Authorization: Token ${PRISMIC_ACCESS_TOKEN}
 generates:
-  ./src/types/graphql-schema.ts:
+  ./src/types/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
