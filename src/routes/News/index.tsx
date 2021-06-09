@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Container from 'components/Container';
+import PageContainer from 'components/PageContainer';
 import Heading from 'components/Heading';
 
 const News: FC = () => {
   return (
-    <Container>
+    <PageContainer>
       <Heading variant="h1">News</Heading>
-    </Container>
+    </PageContainer>
   );
 };
 
