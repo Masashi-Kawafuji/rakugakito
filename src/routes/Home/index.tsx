@@ -1,18 +1,11 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import Container from 'components/Container';
 import Heading from 'components/Heading';
 import Divider from 'components/Divider';
 import ArticleList from 'components/ArticleList';
 import hero from 'assets/images/hero.png';
-import data, { Article } from 'dummy-data/articles';
 
 const Home: FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-
-  useEffect(() => {
-    setArticles(data);
-  }, []);
-
   return (
     <>
       <section>
@@ -29,7 +22,6 @@ const Home: FC = () => {
       <Container>
         <section className="mt-6">
           <Heading variant="h2">News</Heading>
-          <ArticleList articles={articles} />
         </section>
         <Divider />
         <section>

@@ -1,19 +1,20 @@
 import { FC } from 'react';
+import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import client from 'utils/graphql/client';
 import Layout from 'layout';
 import Routes from 'routes';
-
-library.add(faTwitter);
+import 'styles.css';
 
 const App: FC = () => {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes />
-      </Layout>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Layout>
+          <Routes />
+        </Layout>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 };
 

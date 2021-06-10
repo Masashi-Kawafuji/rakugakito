@@ -1,15 +1,7 @@
-import { FC, HTMLAttributes } from 'react';
-import { Article } from 'dummy-data/articles';
+import { FC } from 'react';
 
-type ArticleItemProps = {
-  article: Article;
-} & Pick<HTMLAttributes<HTMLDivElement>, 'className'>;
-
-const ArticleItem: FC<ArticleItemProps> = ({
-  article: { title, publishedAt, category, body },
-  className,
-}) => {
-  return <div className={className || ''} />;
+const ArticleItem: FC = () => {
+  return <div />;
 };
 
 export default ArticleItem;
