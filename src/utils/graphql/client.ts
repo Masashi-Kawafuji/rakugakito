@@ -1,13 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Prismic from '@prismicio/client';
-import { PRISMIC_ENDPOINT, GRAPHQL_ENDPOINT } from 'config';
+import {
+  PRISMIC_ENDPOINT,
+  GRAPHQL_ENDPOINT,
+  PRISMIC_ACCESS_TOKEN,
+} from 'config';
 
-const link = setContext(async (request, previousContext) => {
+const httpLink = new HttpLink({
+  uri: GRAPHQL_ENDPOINT,
+  headers: {
+    Authorization: `Token ${PRISMIC_ACCESS_TOKEN}`,
+  },
+  useGETForQueries: true,
+});
+
+const prismicRefLink = setContext(async () => {
   const { refs } = await Prismic.getApi(PRISMIC_ENDPOINT);
   return {
-    ...previousContext,
     headers: {
       'Prismic-Ref': refs[0].ref,
     },
@@ -15,8 +26,7 @@ const link = setContext(async (request, previousContext) => {
 });
 
 const client = new ApolloClient({
-  uri: GRAPHQL_ENDPOINT,
-  link,
+  link: prismicRefLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

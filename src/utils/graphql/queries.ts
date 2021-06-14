@@ -18,3 +18,23 @@ export const GET_ARTICLE_LIST = gql`
     }
   }
 `;
+
+export const GET_SONGS = gql`
+  query ($limit: Int!) {
+    allSongs(first: $limit) {
+      edges {
+        node {
+          _meta {
+            id
+          }
+          name
+          audio {
+            ... on _FileLink {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
