@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_ARTICLE_LIST = gql`
-  query ($limit: Int!) {
-    allArticles(sortBy: meta_firstPublicationDate_DESC, first: $limit) {
+  query ($first: Int!) {
+    allArticles(sortBy: meta_firstPublicationDate_DESC, first: $first) {
       edges {
         node {
           _meta {
@@ -20,8 +20,8 @@ export const GET_ARTICLE_LIST = gql`
 `;
 
 export const GET_SONGS = gql`
-  query ($limit: Int!) {
-    allSongs(first: $limit) {
+  query ($first: Int!) {
+    allSongs(first: $first) {
       edges {
         node {
           _meta {

@@ -1,4 +1,4 @@
-export type Maybe<T> = T | null;
+export type Maybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -19,12 +19,12 @@ export type Scalars = {
 
 export type Article = _Document & _Linkable & {
   __typename?: 'Article';
-  title?: Maybe<Scalars['String']>;
-  featured_image?: Maybe<Scalars['Json']>;
-  excerpt?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['Json']>;
+  title: Maybe<Scalars['String']>;
+  featured_image: Maybe<Scalars['Json']>;
+  excerpt: Maybe<Scalars['String']>;
+  body: Maybe<Scalars['Json']>;
   _meta: Meta;
-  _linkType?: Maybe<Scalars['String']>;
+  _linkType: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of items. */
@@ -33,7 +33,7 @@ export type ArticleConnectionConnection = {
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
-  edges?: Maybe<Array<Maybe<ArticleConnectionEdge>>>;
+  edges: Maybe<Array<Maybe<ArticleConnectionEdge>>>;
   totalCount: Scalars['Long'];
 };
 
@@ -54,7 +54,7 @@ export type Meta = {
   /** The id of the document. */
   id: Scalars['String'];
   /** The uid of the document. */
-  uid?: Maybe<Scalars['String']>;
+  uid: Maybe<Scalars['String']>;
   /** The type of the document. */
   type: Scalars['String'];
   /** The tags of the document. */
@@ -64,9 +64,9 @@ export type Meta = {
   /** Alternate languages the document. */
   alternateLanguages: Array<RelatedDocument>;
   /** The first publication date of the document. */
-  firstPublicationDate?: Maybe<Scalars['DateTime']>;
+  firstPublicationDate: Maybe<Scalars['DateTime']>;
   /** The last publication date of the document. */
-  lastPublicationDate?: Maybe<Scalars['DateTime']>;
+  lastPublicationDate: Maybe<Scalars['DateTime']>;
 };
 
 /** Information about pagination in a connection. */
@@ -77,9 +77,9 @@ export type PageInfo = {
   /** When paginating backwards, are there more items? */
   hasPreviousPage: Scalars['Boolean'];
   /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']>;
+  startCursor: Maybe<Scalars['String']>;
   /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']>;
+  endCursor: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -174,7 +174,7 @@ export type RelatedDocument = {
   /** The id of the document. */
   id: Scalars['String'];
   /** The uid of the document. */
-  uid?: Maybe<Scalars['String']>;
+  uid: Maybe<Scalars['String']>;
   /** The type of the document. */
   type: Scalars['String'];
   /** The language of the document. */
@@ -183,10 +183,10 @@ export type RelatedDocument = {
 
 export type Song = _Document & _Linkable & {
   __typename?: 'Song';
-  name?: Maybe<Scalars['String']>;
-  audio?: Maybe<_Linkable>;
+  name: Maybe<Scalars['String']>;
+  audio: Maybe<_Linkable>;
   _meta: Meta;
-  _linkType?: Maybe<Scalars['String']>;
+  _linkType: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of items. */
@@ -195,7 +195,7 @@ export type SongConnectionConnection = {
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
-  edges?: Maybe<Array<Maybe<SongConnectionEdge>>>;
+  edges: Maybe<Array<Maybe<SongConnectionEdge>>>;
   totalCount: Scalars['Long'];
 };
 
@@ -264,7 +264,7 @@ export type _DocumentConnection = {
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
-  edges?: Maybe<Array<Maybe<_DocumentEdge>>>;
+  edges: Maybe<Array<Maybe<_DocumentEdge>>>;
   totalCount: Scalars['Long'];
 };
 
@@ -281,8 +281,8 @@ export type _DocumentEdge = {
 export type _ExternalLink = _Linkable & {
   __typename?: '_ExternalLink';
   url: Scalars['String'];
-  target?: Maybe<Scalars['String']>;
-  _linkType?: Maybe<Scalars['String']>;
+  target: Maybe<Scalars['String']>;
+  _linkType: Maybe<Scalars['String']>;
 };
 
 /** A linked file */
@@ -291,7 +291,7 @@ export type _FileLink = _Linkable & {
   name: Scalars['String'];
   url: Scalars['String'];
   size: Scalars['Long'];
-  _linkType?: Maybe<Scalars['String']>;
+  _linkType: Maybe<Scalars['String']>;
 };
 
 /** A linked image */
@@ -302,12 +302,12 @@ export type _ImageLink = _Linkable & {
   size: Scalars['Long'];
   height: Scalars['Int'];
   width: Scalars['Int'];
-  _linkType?: Maybe<Scalars['String']>;
+  _linkType: Maybe<Scalars['String']>;
 };
 
 /** A prismic link */
 export type _Linkable = {
-  _linkType?: Maybe<Scalars['String']>;
+  _linkType: Maybe<Scalars['String']>;
 };
 
 export type Similar = {

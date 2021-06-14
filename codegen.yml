@@ -2,9 +2,13 @@ schema:
   - https://rakugakito.prismic.io/graphql:
       method: GET
       headers:
-        Prismic-Ref: YMPB4RQAACcAZ_eF
+        Prismic-Ref: YMdGWxQAACUAd0lP
 generates:
   ./src/types/graphql.ts:
     plugins:
       - typescript
-      - typescript-operations
+    config:
+      maybeValue: T
+      avoidOptionals:
+        field: true
+        defaultValue: true
