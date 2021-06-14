@@ -1,12 +1,22 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { PRISMIC_REF, PRISMIC_ACCESS_TOKEN } from 'config';
+import { setContext } from '@apollo/client/link/context';
+import Prismic from '@prismicio/client';
+import { PRISMIC_ENDPOINT, GRAPHQL_ENDPOINT } from 'config';
+
+const link = setContext(async (request, previousContext) => {
+  const { refs } = await Prismic.getApi(PRISMIC_ENDPOINT);
+  return {
+    ...previousContext,
+    headers: {
+      'Prismic-Ref': refs[0].ref,
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: 'https://rakugakito.prismic.io/graphql',
-  headers: {
-    'Prismic-Ref': PRISMIC_REF,
-    Authorization: `Token ${PRISMIC_ACCESS_TOKEN}`,
-  },
+  uri: GRAPHQL_ENDPOINT,
+  link,
   cache: new InMemoryCache(),
 });
 

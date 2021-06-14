@@ -2,8 +2,7 @@ schema:
   - https://rakugakito.prismic.io/graphql:
       method: GET
       headers:
-        Prismic-Ref: YMDuUBQAACcAW50t
-        Authorization: Token ${PRISMIC_ACCESS_TOKEN}
+        Prismic-Ref: YMPB4RQAACcAZ_eF
 generates:
   ./src/types/graphql.ts:
     plugins:

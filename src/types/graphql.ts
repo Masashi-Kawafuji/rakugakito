@@ -183,8 +183,8 @@ export type RelatedDocument = {
 
 export type Song = _Document & _Linkable & {
   __typename?: 'Song';
-  title?: Maybe<Scalars['String']>;
-  url?: Maybe<_Linkable>;
+  name?: Maybe<Scalars['String']>;
+  audio?: Maybe<_Linkable>;
   _meta: Meta;
   _linkType?: Maybe<Scalars['String']>;
 };
@@ -233,8 +233,8 @@ export enum SortSongy {
   MetaFirstPublicationDateDesc = 'meta_firstPublicationDate_DESC',
   MetaLastPublicationDateAsc = 'meta_lastPublicationDate_ASC',
   MetaLastPublicationDateDesc = 'meta_lastPublicationDate_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC'
 }
 
 export type WhereArticle = {
@@ -247,10 +247,10 @@ export type WhereArticle = {
 };
 
 export type WhereSong = {
-  title?: Maybe<Scalars['String']>;
-  title_fulltext?: Maybe<Scalars['String']>;
-  /** url */
-  url?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_fulltext?: Maybe<Scalars['String']>;
+  /** audio */
+  audio?: Maybe<Scalars['String']>;
 };
 
 /** A prismic document */

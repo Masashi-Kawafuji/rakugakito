@@ -1,16 +1,16 @@
 import { FC, Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-const Home = lazy(() => import(/* webpackChunkName: "home" */ './Home'));
-const News = lazy(() => import(/* webpackChunkName: "news" */ './News'));
-const Songs = lazy(() => import(/* webpackChunkName: "songs" */ './Songs'));
-const Video = lazy(() => import(/* webpackChunkName: "video" */ './Video'));
-const About = lazy(() => import(/* webpackChunkName: "about" */ './About'));
+const Home = lazy(() => import(/* webpackChunkName: "Home" */ './Home'));
+const News = lazy(() => import(/* webpackChunkName: "News" */ './News'));
+const Songs = lazy(() => import(/* webpackChunkName: "Songs" */ './Songs'));
+const Video = lazy(() => import(/* webpackChunkName: "Video" */ './Video'));
+const About = lazy(() => import(/* webpackChunkName: "About" */ './About'));
 const Contact = lazy(
-  () => import(/* webpackChunkName: "contact" */ './Contact')
+  () => import(/* webpackChunkName: "Contact" */ './Contact')
 );
 const PageNotFound = lazy(
-  () => import(/* webpackChunkName: "page-not-found" */ './PageNotFound')
+  () => import(/* webpackChunkName: "PageNotFound" */ './PageNotFound')
 );
 
 const Routes: FC = () => {
