@@ -335,6 +335,27 @@ export type ArticleNodeFragment = (
   ) }
 );
 
+export type SongFieldsFragment = (
+  { __typename?: 'Song' }
+  & Pick<Song, 'name'>
+  & { audio: Maybe<{ __typename?: 'Article' } | { __typename?: 'Song' } | { __typename?: '_ExternalLink' } | (
+    { __typename?: '_FileLink' }
+    & Pick<_FileLink, 'url'>
+  ) | { __typename?: '_ImageLink' }> }
+);
+
+export type SongNodeFragment = (
+  { __typename?: 'SongConnectionEdge' }
+  & { node: (
+    { __typename?: 'Song' }
+    & { _meta: (
+      { __typename?: 'Meta' }
+      & Pick<Meta, 'id'>
+    ) }
+    & SongFieldsFragment
+  ) }
+);
+
 export type GetArticleListQueryVariables = Exact<{
   first: Scalars['Int'];
 }>;
@@ -347,6 +368,22 @@ export type GetArticleListQuery = (
     & { edges: Maybe<Array<Maybe<(
       { __typename?: 'ArticleConnectionEdge' }
       & ArticleNodeFragment
+    )>>> }
+  ) }
+);
+
+export type GetSongsQueryVariables = Exact<{
+  first: Scalars['Int'];
+}>;
+
+
+export type GetSongsQuery = (
+  { __typename?: 'Query' }
+  & { allSongs: (
+    { __typename?: 'SongConnectionConnection' }
+    & { edges: Maybe<Array<Maybe<(
+      { __typename?: 'SongConnectionEdge' }
+      & SongNodeFragment
     )>>> }
   ) }
 );
@@ -370,6 +407,26 @@ export const ArticleNodeFragmentDoc = gql`
   }
 }
     ${ArticleFieldsFragmentDoc}`;
+export const SongFieldsFragmentDoc = gql`
+    fragment SongFields on Song {
+  name
+  audio {
+    ... on _FileLink {
+      url
+    }
+  }
+}
+    `;
+export const SongNodeFragmentDoc = gql`
+    fragment SongNode on SongConnectionEdge {
+  node {
+    _meta {
+      id
+    }
+    ...SongFields
+  }
+}
+    ${SongFieldsFragmentDoc}`;
 export const GetArticleListDocument = gql`
     query GetArticleList($first: Int!) {
   allArticles(sortBy: meta_firstPublicationDate_DESC, first: $first) {
@@ -407,3 +464,40 @@ export function useGetArticleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetArticleListQueryHookResult = ReturnType<typeof useGetArticleListQuery>;
 export type GetArticleListLazyQueryHookResult = ReturnType<typeof useGetArticleListLazyQuery>;
 export type GetArticleListQueryResult = Apollo.QueryResult<GetArticleListQuery, GetArticleListQueryVariables>;
+export const GetSongsDocument = gql`
+    query GetSongs($first: Int!) {
+  allSongs {
+    edges {
+      ...SongNode
+    }
+  }
+}
+    ${SongNodeFragmentDoc}`;
+
+/**
+ * __useGetSongsQuery__
+ *
+ * To run a query within a React component, call `useGetSongsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSongsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSongsQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useGetSongsQuery(baseOptions: Apollo.QueryHookOptions<GetSongsQuery, GetSongsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSongsQuery, GetSongsQueryVariables>(GetSongsDocument, options);
+      }
+export function useGetSongsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSongsQuery, GetSongsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSongsQuery, GetSongsQueryVariables>(GetSongsDocument, options);
+        }
+export type GetSongsQueryHookResult = ReturnType<typeof useGetSongsQuery>;
+export type GetSongsLazyQueryHookResult = ReturnType<typeof useGetSongsLazyQuery>;
+export type GetSongsQueryResult = Apollo.QueryResult<GetSongsQuery, GetSongsQueryVariables>;

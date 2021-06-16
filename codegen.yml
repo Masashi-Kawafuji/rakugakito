@@ -13,6 +13,6 @@ generates:
       - typescript-operations
       - typescript-react-apollo
 config:
+  maybeValue: T
   avoidOptionals:
     field: true
-  withHooks: true

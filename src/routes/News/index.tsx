@@ -1,15 +1,13 @@
 import { FC } from 'react';
 import { gql } from '@apollo/client';
-import {
-  ArticleNodeFragment,
-  useGetArticleListQuery,
-} from 'types/generated/graphql';
+import { useGetArticleListQuery } from 'types/generated/graphql';
 import PageContainer from 'components/PageContainer';
 import Heading from 'components/Heading';
-import ArticleList, { ARTICLE_NODES } from 'components/ArticleList';
+import FallbackContent from 'components/FallbackContent';
+import ArticleList, { ARTICLE_NODE } from 'components/ArticleList';
 
 const GET_ARTICLE_LIST = gql`
-  ${ARTICLE_NODES}
+  ${ARTICLE_NODE}
   query GetArticleList($first: Int!) {
     allArticles(sortBy: meta_firstPublicationDate_DESC, first: $first) {
       edges {
@@ -29,11 +27,9 @@ const News: FC = () => {
   return (
     <PageContainer>
       <Heading variant="h1">News</Heading>
-      {loading ? (
-        'loading...'
-      ) : (
-        <ArticleList articles={data?.allArticles.edges || []} />
-      )}
+      <FallbackContent loading={loading} error={error}>
+        {data && <ArticleList articles={data.allArticles.edges} />}
+      </FallbackContent>
     </PageContainer>
   );
 };
