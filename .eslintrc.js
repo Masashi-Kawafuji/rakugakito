@@ -23,6 +23,8 @@ module.exports = {
   },
   rules: {
     'no-use-before-define': 'off',
+    camelcase: 'off',
+    'no-underscore-dangle': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/extensions': ['off', { tsx: 'ignroePackages' }],
     'react/jsx-uses-react': 'off',

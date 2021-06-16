@@ -3,12 +3,16 @@ schema:
       method: GET
       headers:
         Prismic-Ref: YMdGWxQAACUAd0lP
+documents:
+  - './src/**/*.ts'
+  - './src/**/*.tsx'
 generates:
-  ./src/types/graphql.ts:
+  ./src/types/generated/graphql.ts:
     plugins:
       - typescript
-    config:
-      maybeValue: T
-      avoidOptionals:
-        field: true
-        defaultValue: true
+      - typescript-operations
+      - typescript-react-apollo
+config:
+  avoidOptionals:
+    field: true
+  withHooks: true

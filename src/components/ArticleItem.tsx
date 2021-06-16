@@ -1,7 +1,25 @@
 import { FC } from 'react';
-import { Article } from 'types/graphql';
+import { gql } from '@apollo/client';
+import { DateTime } from 'luxon';
+import { ArticleFieldsFragment } from 'types/generated/graphql';
 
-type ArticleItemProps = { article: Article };
+export const ARTICLE_FIELDS = gql`
+  fragment ArticleFields on Article {
+    _meta {
+      id
+      tags
+      firstPublicationDate
+    }
+    title
+    featured_image
+    excerpt
+  }
+`;
+
+type ArticleItemProps = {
+  article: ArticleFieldsFragment;
+};
+// type ArticleItemProps = { article: Article };
 
 const ArticleItem: FC<ArticleItemProps> = ({
   article: {
@@ -15,7 +33,7 @@ const ArticleItem: FC<ArticleItemProps> = ({
     <div>
       <ul>
         <li>{tags}</li>
-        <li>{firstPublicationDate}</li>
+        <li>{DateTime.fromISO(firstPublicationDate).toFormat('yyyy.MM.dd')}</li>
         <li>{title}</li>
         <li>{featured_image.url}</li>
         <li>{excerpt}</li>

@@ -1,14 +1,27 @@
 import { FC } from 'react';
-import { Article } from 'types/graphql';
-import ArticleItem from './ArticleItem';
+import { gql } from '@apollo/client';
+import { ArticleNodeFragment } from 'types/generated/graphql';
+import ArticleItem, { ARTICLE_FIELDS } from './ArticleItem';
 
-type ArticleListProps = { articles: Article[] };
+export const ARTICLE_NODES = gql`
+  ${ARTICLE_FIELDS}
+  fragment ArticleNode on ArticleConnectionEdge {
+    node {
+      ...ArticleFields
+    }
+  }
+`;
+
+type ArticleListProps = {
+  articles: ArticleNodeFragment[];
+};
+// type ArticleListProps = { articles: Article[] };
 
 const ArticleList: FC<ArticleListProps> = ({ articles }) => {
   return (
     <ul>
-      {articles?.map((article) => (
-        <ArticleItem key={article._meta.id} article={article} />
+      {articles.map(({ node }) => (
+        <ArticleItem key={node._meta.id} article={node} />
       ))}
     </ul>
   );

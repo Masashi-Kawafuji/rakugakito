@@ -1,7 +1,10 @@
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -314,3 +317,93 @@ export type Similar = {
   documentId: Scalars['String'];
   max: Scalars['Int'];
 };
+
+export type ArticleFieldsFragment = (
+  { __typename?: 'Article' }
+  & Pick<Article, 'title' | 'featured_image' | 'excerpt'>
+  & { _meta: (
+    { __typename?: 'Meta' }
+    & Pick<Meta, 'id' | 'tags' | 'firstPublicationDate'>
+  ) }
+);
+
+export type ArticleNodeFragment = (
+  { __typename?: 'ArticleConnectionEdge' }
+  & { node: (
+    { __typename?: 'Article' }
+    & ArticleFieldsFragment
+  ) }
+);
+
+export type GetArticleListQueryVariables = Exact<{
+  first: Scalars['Int'];
+}>;
+
+
+export type GetArticleListQuery = (
+  { __typename?: 'Query' }
+  & { allArticles: (
+    { __typename?: 'ArticleConnectionConnection' }
+    & { edges: Maybe<Array<Maybe<(
+      { __typename?: 'ArticleConnectionEdge' }
+      & ArticleNodeFragment
+    )>>> }
+  ) }
+);
+
+export const ArticleFieldsFragmentDoc = gql`
+    fragment ArticleFields on Article {
+  _meta {
+    id
+    tags
+    firstPublicationDate
+  }
+  title
+  featured_image
+  excerpt
+}
+    `;
+export const ArticleNodeFragmentDoc = gql`
+    fragment ArticleNode on ArticleConnectionEdge {
+  node {
+    ...ArticleFields
+  }
+}
+    ${ArticleFieldsFragmentDoc}`;
+export const GetArticleListDocument = gql`
+    query GetArticleList($first: Int!) {
+  allArticles(sortBy: meta_firstPublicationDate_DESC, first: $first) {
+    edges {
+      ...ArticleNode
+    }
+  }
+}
+    ${ArticleNodeFragmentDoc}`;
+
+/**
+ * __useGetArticleListQuery__
+ *
+ * To run a query within a React component, call `useGetArticleListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetArticleListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetArticleListQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useGetArticleListQuery(baseOptions: Apollo.QueryHookOptions<GetArticleListQuery, GetArticleListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetArticleListQuery, GetArticleListQueryVariables>(GetArticleListDocument, options);
+      }
+export function useGetArticleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetArticleListQuery, GetArticleListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetArticleListQuery, GetArticleListQueryVariables>(GetArticleListDocument, options);
+        }
+export type GetArticleListQueryHookResult = ReturnType<typeof useGetArticleListQuery>;
+export type GetArticleListLazyQueryHookResult = ReturnType<typeof useGetArticleListLazyQuery>;
+export type GetArticleListQueryResult = Apollo.QueryResult<GetArticleListQuery, GetArticleListQueryVariables>;
