@@ -18,8 +18,8 @@ type ArticleListProps = {
 
 const ArticleList: FC<ArticleListProps> = ({ articles }) => {
   return (
-    <ul>
-      {articles?.map(({ node }) => (
+    <ul className="grid grid-cols-3 gap-6">
+      {articles.map(({ node }) => (
         <ArticleItem key={node._meta.id} article={node} />
       ))}
     </ul>

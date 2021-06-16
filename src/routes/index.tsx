@@ -18,7 +18,7 @@ const Routes: FC = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/news" component={News} />
+        <Route exact path="/news" component={News} />
         <Route path="/songs" component={Songs} />
         <Route path="/video" component={Video} />
         <Route path="/about" component={About} />

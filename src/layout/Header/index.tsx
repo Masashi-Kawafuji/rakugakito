@@ -8,7 +8,7 @@ import Menu from './components/Menu';
 
 const Header: FC = () => {
   return (
-    <header className="bg-white border-b border-gray-200">
+    <header className="bg-white shadow">
       <div className="px-5 lg:px-12 py-3 text-center border-b border-gray-200">
         <div className="relative">
           <Link to="/">落餓鬼党</Link>
