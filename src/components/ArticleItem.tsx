@@ -30,8 +30,8 @@ const ArticleItem: FC<ArticleItemProps> = ({
   },
 }) => {
   return (
-    <li className="bg-white rounded-md shadow">
-      <Link to={`/news/${id}`}>
+    <Link to={`/news/${id}`}>
+      <div className="bg-white rounded-md">
         <img
           src={featured_image.url}
           alt={featured_image.alt}
@@ -51,8 +51,8 @@ const ArticleItem: FC<ArticleItemProps> = ({
             <dd className="text-lighten">{excerpt}</dd>
           </dl>
         </div>
-      </Link>
-    </li>
+      </div>
+    </Link>
   );
 };
 

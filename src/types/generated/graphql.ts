@@ -357,7 +357,7 @@ export type SongNodeFragment = (
 );
 
 export type GetArticleListQueryVariables = Exact<{
-  first: Scalars['Int'];
+  first?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -373,7 +373,7 @@ export type GetArticleListQuery = (
 );
 
 export type GetSongsQueryVariables = Exact<{
-  first: Scalars['Int'];
+  first?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -428,7 +428,7 @@ export const SongNodeFragmentDoc = gql`
 }
     ${SongFieldsFragmentDoc}`;
 export const GetArticleListDocument = gql`
-    query GetArticleList($first: Int!) {
+    query GetArticleList($first: Int) {
   allArticles(sortBy: meta_firstPublicationDate_DESC, first: $first) {
     edges {
       ...ArticleNode
@@ -453,7 +453,7 @@ export const GetArticleListDocument = gql`
  *   },
  * });
  */
-export function useGetArticleListQuery(baseOptions: Apollo.QueryHookOptions<GetArticleListQuery, GetArticleListQueryVariables>) {
+export function useGetArticleListQuery(baseOptions?: Apollo.QueryHookOptions<GetArticleListQuery, GetArticleListQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetArticleListQuery, GetArticleListQueryVariables>(GetArticleListDocument, options);
       }
@@ -465,8 +465,8 @@ export type GetArticleListQueryHookResult = ReturnType<typeof useGetArticleListQ
 export type GetArticleListLazyQueryHookResult = ReturnType<typeof useGetArticleListLazyQuery>;
 export type GetArticleListQueryResult = Apollo.QueryResult<GetArticleListQuery, GetArticleListQueryVariables>;
 export const GetSongsDocument = gql`
-    query GetSongs($first: Int!) {
-  allSongs {
+    query GetSongs($first: Int) {
+  allSongs(first: $first) {
     edges {
       ...SongNode
     }
@@ -490,7 +490,7 @@ export const GetSongsDocument = gql`
  *   },
  * });
  */
-export function useGetSongsQuery(baseOptions: Apollo.QueryHookOptions<GetSongsQuery, GetSongsQueryVariables>) {
+export function useGetSongsQuery(baseOptions?: Apollo.QueryHookOptions<GetSongsQuery, GetSongsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetSongsQuery, GetSongsQueryVariables>(GetSongsDocument, options);
       }

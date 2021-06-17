@@ -8,7 +8,7 @@ import ArticleList, { ARTICLE_NODE } from 'components/ArticleList';
 
 const GET_ARTICLE_LIST = gql`
   ${ARTICLE_NODE}
-  query GetArticleList($first: Int!) {
+  query GetArticleList($first: Int) {
     allArticles(sortBy: meta_firstPublicationDate_DESC, first: $first) {
       edges {
         ...ArticleNode
@@ -18,11 +18,7 @@ const GET_ARTICLE_LIST = gql`
 `;
 
 const News: FC = () => {
-  const { loading, error, data } = useGetArticleListQuery({
-    variables: {
-      first: 3,
-    },
-  });
+  const { loading, error, data } = useGetArticleListQuery();
 
   return (
     <PageContainer>

@@ -1,31 +1,42 @@
-import { FC, Suspense, lazy } from 'react';
+import { FC } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import loadable from '@loadable/component';
 
-const Home = lazy(() => import(/* webpackChunkName: "Home" */ './Home'));
-const News = lazy(() => import(/* webpackChunkName: "News" */ './News'));
-const Songs = lazy(() => import(/* webpackChunkName: "Songs" */ './Songs'));
-const Video = lazy(() => import(/* webpackChunkName: "Video" */ './Video'));
-const About = lazy(() => import(/* webpackChunkName: "About" */ './About'));
-const Contact = lazy(
+const Home = loadable(() => import(/* webpackChunkName: "Home" */ './Home'));
+const News = loadable(() => import(/* webpackChunkName: "News" */ './News'));
+const Songs = loadable(() => import(/* webpackChunkName: "Songs" */ './Songs'));
+// const Video = loadable(() => import(/* webpackChunkName: "Video" */ './Video'));
+const About = loadable(() => import(/* webpackChunkName: "About" */ './About'));
+const Contact = loadable(
   () => import(/* webpackChunkName: "Contact" */ './Contact')
 );
-const PageNotFound = lazy(
+const PageNotFound = loadable(
   () => import(/* webpackChunkName: "PageNotFound" */ './PageNotFound')
 );
 
 const Routes: FC = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/news" component={News} />
-        <Route path="/songs" component={Songs} />
-        <Route path="/video" component={Video} />
-        <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-        <Route path="*" component={PageNotFound} />
-      </Switch>
-    </Suspense>
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/news">
+        <News />
+      </Route>
+      <Route path="/songs">
+        <Songs />
+      </Route>
+      {/* <Route path="/video" component={Video} /> */}
+      <Route path="/about">
+        <About />
+      </Route>
+      <Route path="/contact">
+        <Contact />
+      </Route>
+      <Route path="*">
+        <PageNotFound />
+      </Route>
+    </Switch>
   );
 };
 
