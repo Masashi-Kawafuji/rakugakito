@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
@@ -6,6 +7,10 @@ module.exports = {
   theme: {
     fontFamily: {
       'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
+    },
+    screens: {
+      xs: '512px',
+      ...defaultTheme.screens,
     },
     extend: {
       colors: {

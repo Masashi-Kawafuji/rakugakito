@@ -14,5 +14,6 @@ generates:
       - typescript-react-apollo
 config:
   maybeValue: T
+  skipTypename: true
   avoidOptionals:
     field: true

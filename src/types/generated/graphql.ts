@@ -21,7 +21,6 @@ export type Scalars = {
 };
 
 export type Article = _Document & _Linkable & {
-  __typename?: 'Article';
   title: Maybe<Scalars['String']>;
   featured_image: Maybe<Scalars['Json']>;
   excerpt: Maybe<Scalars['String']>;
@@ -32,7 +31,6 @@ export type Article = _Document & _Linkable & {
 
 /** A connection to a list of items. */
 export type ArticleConnectionConnection = {
-  __typename?: 'ArticleConnectionConnection';
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
@@ -42,7 +40,6 @@ export type ArticleConnectionConnection = {
 
 /** An edge in a connection. */
 export type ArticleConnectionEdge = {
-  __typename?: 'ArticleConnectionEdge';
   /** The item at the end of the edge. */
   node: Article;
   /** A cursor for use in pagination. */
@@ -53,7 +50,6 @@ export type ArticleConnectionEdge = {
 
 
 export type Meta = {
-  __typename?: 'Meta';
   /** The id of the document. */
   id: Scalars['String'];
   /** The uid of the document. */
@@ -74,7 +70,6 @@ export type Meta = {
 
 /** Information about pagination in a connection. */
 export type PageInfo = {
-  __typename?: 'PageInfo';
   /** When paginating forwards, are there more items? */
   hasNextPage: Scalars['Boolean'];
   /** When paginating backwards, are there more items? */
@@ -86,7 +81,6 @@ export type PageInfo = {
 };
 
 export type Query = {
-  __typename?: 'Query';
   _allDocuments: _DocumentConnection;
   allArticles: ArticleConnectionConnection;
   allSongs: SongConnectionConnection;
@@ -173,7 +167,6 @@ export type QueryAllSongsArgs = {
 };
 
 export type RelatedDocument = {
-  __typename?: 'RelatedDocument';
   /** The id of the document. */
   id: Scalars['String'];
   /** The uid of the document. */
@@ -185,7 +178,6 @@ export type RelatedDocument = {
 };
 
 export type Song = _Document & _Linkable & {
-  __typename?: 'Song';
   name: Maybe<Scalars['String']>;
   audio: Maybe<_Linkable>;
   _meta: Meta;
@@ -194,7 +186,6 @@ export type Song = _Document & _Linkable & {
 
 /** A connection to a list of items. */
 export type SongConnectionConnection = {
-  __typename?: 'SongConnectionConnection';
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
@@ -204,7 +195,6 @@ export type SongConnectionConnection = {
 
 /** An edge in a connection. */
 export type SongConnectionEdge = {
-  __typename?: 'SongConnectionEdge';
   /** The item at the end of the edge. */
   node: Song;
   /** A cursor for use in pagination. */
@@ -263,7 +253,6 @@ export type _Document = {
 
 /** A connection to a list of items. */
 export type _DocumentConnection = {
-  __typename?: '_DocumentConnection';
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
@@ -273,7 +262,6 @@ export type _DocumentConnection = {
 
 /** An edge in a connection. */
 export type _DocumentEdge = {
-  __typename?: '_DocumentEdge';
   /** The item at the end of the edge. */
   node: _Document;
   /** A cursor for use in pagination. */
@@ -282,7 +270,6 @@ export type _DocumentEdge = {
 
 /** An external link */
 export type _ExternalLink = _Linkable & {
-  __typename?: '_ExternalLink';
   url: Scalars['String'];
   target: Maybe<Scalars['String']>;
   _linkType: Maybe<Scalars['String']>;
@@ -290,7 +277,6 @@ export type _ExternalLink = _Linkable & {
 
 /** A linked file */
 export type _FileLink = _Linkable & {
-  __typename?: '_FileLink';
   name: Scalars['String'];
   url: Scalars['String'];
   size: Scalars['Long'];
@@ -299,7 +285,6 @@ export type _FileLink = _Linkable & {
 
 /** A linked image */
 export type _ImageLink = _Linkable & {
-  __typename?: '_ImageLink';
   name: Scalars['String'];
   url: Scalars['String'];
   size: Scalars['Long'];
@@ -319,74 +304,35 @@ export type Similar = {
 };
 
 export type ArticleFieldsFragment = (
-  { __typename?: 'Article' }
-  & Pick<Article, 'title' | 'featured_image' | 'excerpt'>
-  & { _meta: (
-    { __typename?: 'Meta' }
-    & Pick<Meta, 'id' | 'tags' | 'firstPublicationDate'>
-  ) }
+  Pick<Article, 'title' | 'featured_image' | 'excerpt'>
+  & { _meta: Pick<Meta, 'id' | 'tags' | 'firstPublicationDate'> }
 );
 
-export type ArticleNodeFragment = (
-  { __typename?: 'ArticleConnectionEdge' }
-  & { node: (
-    { __typename?: 'Article' }
-    & ArticleFieldsFragment
-  ) }
-);
+export type ArticleNodeFragment = { node: ArticleFieldsFragment };
 
 export type SongFieldsFragment = (
-  { __typename?: 'Song' }
-  & Pick<Song, 'name'>
-  & { audio: Maybe<{ __typename?: 'Article' } | { __typename?: 'Song' } | { __typename?: '_ExternalLink' } | (
-    { __typename?: '_FileLink' }
-    & Pick<_FileLink, 'url'>
-  ) | { __typename?: '_ImageLink' }> }
+  Pick<Song, 'name'>
+  & { audio: Maybe<Pick<_FileLink, 'url'>> }
 );
 
-export type SongNodeFragment = (
-  { __typename?: 'SongConnectionEdge' }
-  & { node: (
-    { __typename?: 'Song' }
-    & { _meta: (
-      { __typename?: 'Meta' }
-      & Pick<Meta, 'id'>
-    ) }
+export type SongNodeFragment = { node: (
+    { _meta: Pick<Meta, 'id'> }
     & SongFieldsFragment
-  ) }
-);
+  ) };
 
 export type GetArticleListQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type GetArticleListQuery = (
-  { __typename?: 'Query' }
-  & { allArticles: (
-    { __typename?: 'ArticleConnectionConnection' }
-    & { edges: Maybe<Array<Maybe<(
-      { __typename?: 'ArticleConnectionEdge' }
-      & ArticleNodeFragment
-    )>>> }
-  ) }
-);
+export type GetArticleListQuery = { allArticles: { edges: Maybe<Array<Maybe<ArticleNodeFragment>>> } };
 
 export type GetSongsQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type GetSongsQuery = (
-  { __typename?: 'Query' }
-  & { allSongs: (
-    { __typename?: 'SongConnectionConnection' }
-    & { edges: Maybe<Array<Maybe<(
-      { __typename?: 'SongConnectionEdge' }
-      & SongNodeFragment
-    )>>> }
-  ) }
-);
+export type GetSongsQuery = { allSongs: { edges: Maybe<Array<Maybe<SongNodeFragment>>> } };
 
 export const ArticleFieldsFragmentDoc = gql`
     fragment ArticleFields on Article {

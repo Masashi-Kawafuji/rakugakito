@@ -19,18 +19,20 @@ type SongItemProps = { song: SongFieldsFragment };
 
 const SongItem: FC<SongItemProps> = ({ song: { name, audio } }) => {
   return (
-    <div className="bg-white p-4 rounded-md">
+    <div className="bg-white flex flex-col justify-center p-4 rounded-md">
       <div className="relative" style={{ paddingBottom: '100%' }}>
-        <p className="absolute top-1/3 text-lg font-medium">{name}</p>
-        <button
-          type="button"
-          className="absolute bottom-0 right-0 text-primary"
-        >
-          <FontAwesomeIcon
-            icon={faPlayCircle}
-            className="text-4xl sm:text-5xl"
-          />
-        </button>
+        <div className="absolute inset-0 flex flex-col justify-center">
+          <p className="text-lg font-medium">{name}</p>
+          <button
+            type="button"
+            className="absolute bottom-0 right-0 text-primary"
+          >
+            <FontAwesomeIcon
+              icon={faPlayCircle}
+              className="text-4xl sm:text-5xl"
+            />
+          </button>
+        </div>
       </div>
     </div>
   );
